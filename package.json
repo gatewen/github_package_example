@@ -1,6 +1,6 @@
 {
   "name": "@gatewen/github-package-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "簡單的 GitHub Package 測試專案",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatewen/github_package_example.git"
+    "url": "git+https://github.com/gatewen/github_package_example.git"
   }
 }
