@@ -1,0 +1,19 @@
+{
+  "name": "@gatewenlee/githubpackage-test",
+  "version": "1.0.0",
+  "description": "簡單的 GitHub Package 測試專案",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["github-packages", "test"],
+  "author": "gatewenlee",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatewenlee/GitHubPackage.git"
+  }
+}
