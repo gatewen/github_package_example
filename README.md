@@ -118,11 +118,38 @@ git push origin v1.0.1
 
 ## 📥 安裝使用套件
 
-### 在其他專案中安裝
+### 在其他電腦/專案中安裝
 
-1. 建立 `.npmrc` 檔案：
+GitHub Packages **不是公開的 npm registry**，需要進行認證和配置：
+
+#### 方法 1：專案配置（推薦）
+
+1. 在專案根目錄建立 `.npmrc` 檔案：
 ```
 @gatewen:registry=https://npm.pkg.github.com
+```
+
+2. 如果套件是私有的，需要加入認證 token：
+```
+@gatewen:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+3. 安裝套件：
+```bash
+npm install @gatewen/github-package-example
+```
+
+#### 方法 2：全域配置
+
+1. 設定全域 npm 配置：
+```bash
+npm config set @gatewen:registry https://npm.pkg.github.com
+
+# 如果需要認證（私有套件）
+npm login --registry=https://npm.pkg.github.com --scope=@gatewen
+# Username: YOUR_GITHUB_USERNAME
+# Password: YOUR_GITHUB_TOKEN
 ```
 
 2. 安裝套件：
@@ -130,7 +157,14 @@ git push origin v1.0.1
 npm install @gatewen/github-package-example
 ```
 
-3. 使用套件：
+#### 方法 3：單次安裝指定 registry
+
+```bash
+npm install @gatewen/github-package-example --registry=https://npm.pkg.github.com
+```
+
+### 使用套件
+
 ```javascript
 const { greet, add, getVersion } = require('@gatewen/github-package-example');
 
@@ -138,6 +172,11 @@ console.log(greet('World'));        // Hello, World! This is from GitHub Package
 console.log(add(2, 3));             // 5
 console.log(getVersion());          // 1.0.1
 ```
+
+### 公開套件 vs 私有套件
+
+- **公開套件**：任何人都可以安裝，但仍需要指定 GitHub Packages registry
+- **私有套件**：需要有讀取權限的 GitHub Token 才能安裝
 
 ## 🧪 測試
 
@@ -153,11 +192,28 @@ Error: Cannot publish over existing version
 ```
 **解決**：更新 package.json 中的版本號
 
-### 2. 404 找不到套件
+### 2. 404 找不到套件（最常見）
 ```
 404 Not Found - GET https://registry.npmjs.org/@gatewen%2fgithub-package-example
 ```
-**解決**：需要在專案中建立 `.npmrc` 指定 GitHub Packages registry
+**原因**：npm 預設從 npmjs.org 查找，但套件在 GitHub Packages
+
+**解決方法**：
+
+a) 建立 `.npmrc` 檔案：
+```bash
+echo "@gatewen:registry=https://npm.pkg.github.com" > .npmrc
+```
+
+b) 或直接指定 registry：
+```bash
+npm install @gatewen/github-package-example --registry=https://npm.pkg.github.com
+```
+
+c) 或設定全域配置：
+```bash
+npm config set @gatewen:registry https://npm.pkg.github.com
+```
 
 ### 3. 權限錯誤
 ```
@@ -169,6 +225,15 @@ Permission denied to repository
 - 確認 repository 有開啟 Actions
 - 檢查 token 權限是否足夠
 - 查看 Actions 頁面的錯誤日誌
+
+### 5. 私有套件無法安裝
+```
+401 Unauthorized - GET https://npm.pkg.github.com/...
+```
+**解決**：需要認證 token，在 `.npmrc` 加入：
+```
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
 
 ## 📝 檔案說明
 
