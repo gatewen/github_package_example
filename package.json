@@ -1,5 +1,5 @@
 {
-  "name": "@gatewenlee/githubpackage-test",
+  "name": "@gatewen/github-package-example",
   "version": "1.0.0",
   "description": "簡單的 GitHub Package 測試專案",
   "main": "index.js",
@@ -7,13 +7,13 @@
     "test": "node test.js"
   },
   "keywords": ["github-packages", "test"],
-  "author": "gatewenlee",
+  "author": "gatewen",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatewenlee/GitHubPackage.git"
+    "url": "https://github.com/gatewen/github_package_example.git"
   }
 }

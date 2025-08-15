@@ -5,13 +5,13 @@
 ## 安裝
 
 ```bash
-npm install @gatewenlee/githubpackage-test
+npm install @gatewen/github-package-example
 ```
 
 ## 使用方法
 
 ```javascript
-const { greet, add, getVersion } = require('@gatewenlee/githubpackage-test');
+const { greet, add, getVersion } = require('@gatewen/github-package-example');
 
 console.log(greet('World'));        // Hello, World! This is from GitHub Package.
 console.log(add(2, 3));             // 5
